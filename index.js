@@ -54,4 +54,15 @@ app.post('/', (req, res) => {
     io.emit(req.body.dimension, req.body.value);
 });
 
+app.get('/insert', (req, res) => {
+    connection.query(`INSERT INTO ${req.query.dimension} (value) VALUES (${req.query.value})`, (error, results, _) => {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(results);            
+        }
+    });
+    io.emit(req.query.dimension, req.query.value);
+});
+
 server.listen(process.env.PORT);
