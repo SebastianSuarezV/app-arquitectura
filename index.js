@@ -29,6 +29,10 @@ connection.connect((error) => {
     console.log('connected as id ' + connection.threadId);
 });
 
+app.get('/port', (_, res) => {
+    res.send(process.env.POR);
+});
+
 app.get('/test-connection', (_, res) => {
     connection.query(`SELECT 1 FROM temperatures`, (error, results, _) => {
         if (error) {
