@@ -62,7 +62,9 @@ app.get('/insert', (req, res) => {
             res.send(results);            
         }
     });
-    io.emit(req.query.dimension, req.query.value);
+    io.emit("temperature", req.query.temperature);
+    io.emit("noise", req.query.noise);
+    io.emit("humidity", req.query.humidity);
 });
 
 server.listen(process.env.PORT);
