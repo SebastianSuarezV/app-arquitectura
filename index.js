@@ -14,10 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const connection = mysql.createConnection({
-    host: '159.89.234.143',
-    user: 'app',
-    password: 'OMexjYkNlGrb35kh',
-    database: 'sensor'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: DB_PASSWORD,
+    database: DB
 });
 
 connection.connect((error) => {
@@ -54,4 +54,4 @@ app.post('/', (req, res) => {
     io.emit(req.body.dimension, req.body.value);
 });
 
-server.listen(4200);
+server.listen(process.env.PORT);
