@@ -59,13 +59,29 @@ app.post('/', (req, res) => {
 });
 
 app.get('/insert', (req, res) => {
-    connection.query(`INSERT INTO ${req.query.dimension} (value) VALUES (${req.query.value})`, (error, results, _) => {
+    connection.query(`INSERT INTO noise (value) VALUES (${req.query.noise})`, (error, results, _) => {
         if (error) {
             res.send(error);
         } else {
             res.send(results);            
         }
     });
+    connection.query(`INSERT INTO temperature (value) VALUES (${req.query.temperature})`, (error, results, _) => {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(results);            
+        }
+    });
+
+    connection.query(`INSERT INTO humidity (value) VALUES (${req.query.humidity})`, (error, results, _) => {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(results);            
+        }
+    });
+
     io.emit("temperature", req.query.temperature);
     io.emit("noise", req.query.noise);
     io.emit("humidity", req.query.humidity);
